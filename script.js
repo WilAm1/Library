@@ -54,7 +54,9 @@ function displayBooks(book) {
     bookContainerDOM.appendChild(bookDiv);
 }
 
-myLibrary.forEach(displayBooks);
+function refreshLibrary() {
+    myLibrary.forEach(displayBooks);
+}
 
 let modalBtn = document.getElementById("modal-btn")
 let modal = document.querySelector(".modal")
@@ -70,3 +72,5 @@ window.onclick = function(e) {
         modal.style.display = "none"
     }
 }
+
+refreshLibrary()

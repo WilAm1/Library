@@ -18,7 +18,22 @@
     <div class="modal">
         <div class="modal-content">
             <span class="close-btn">&times;</span>
-            <p>this is the text inside the modal</p>
+            <div class="modal-header">
+                <h3>Add Book</h3>
+            </div>
+            <form action="" class="form">
+                <label for="name">Name: <input type="text" id="name"></label>
+                <label for="author">Author: <input type="text" id="author"></label>
+                <label for="number">Pages: <input type="number" id="pages"></label>
+
+                <label for="reading">Finished Reading
+                    <input type="radio" name="finishedReading" id="reading">
+                </label>
+                <label for="not-reading">Not Finished Reading
+                    <input type="radio" name="finishedReading" id="not-reading">
+                </label>
+                <button type="submit">Submit</button>
+            </form>
         </div>
     </div>
     <div class="book-container">

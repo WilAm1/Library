@@ -19,13 +19,20 @@
 .modal-content {
     position: relative;
     background-color: white;
-    padding: 20px;
-    margin: auto;
-    width: 75%;
+    padding: 30px;
+    margin: 5vh auto;
+    width: 55%;
     -webkit-animation-name: animatetop;
     -webkit-animation-duration: 0.4s;
     animation-name: animatetop;
     animation-duration: 0.4s
+}
+
+.form {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    width: 100%;
 }
 
 .close-btn {
