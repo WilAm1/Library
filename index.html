@@ -21,18 +21,18 @@
             <div class="modal-header">
                 <h3>Add Book</h3>
             </div>
-            <form action="" class="form">
-                <label for="name">Name: <input type="text" id="name"></label>
-                <label for="author">Author: <input type="text" id="author"></label>
-                <label for="number">Pages: <input type="number" id="pages"></label>
+            <form class="form" method="dialog">
+                <label for="name">Name: <input type="text" id="name" name="Name"></label>
+                <label for="author">Author: <input type="text" id="author" name="Author"></label>
+                <label for="number">Pages: <input type="number" id="pages" name="Pages"></label>
 
                 <label for="reading">Finished Reading
-                    <input type="radio" name="finishedReading" id="reading">
+                    <input type="radio" name="finishedReading" id="reading" value="true">
                 </label>
                 <label for="not-reading">Not Finished Reading
-                    <input type="radio" name="finishedReading" id="not-reading">
+                    <input type="radio" name="finishedReading" id="not-reading" value="false">
                 </label>
-                <button type="submit">Submit</button>
+                <button type="submit" class="submit-form-btn" id="submit-form-btn">Submit</button>
             </form>
         </div>
     </div>

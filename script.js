@@ -73,4 +73,16 @@ window.onclick = function(e) {
     }
 }
 
+const submitFormBtnDOM = document.querySelector('#submit-form-btn');
+
+const getFormInput = function() {
+    const name = document.getElementById('name');
+    const author = document.getElementById('author');
+    const pages = document.getElementById('pages');
+    const readIt = (document.getElementById('reading').checked) ? true : false;
+    const book = new Book(name.value, author.value, +pages.value, readIt);
+    console.log(book);
+}
+
+submitFormBtnDOM.onclick = getFormInput
 refreshLibrary()
