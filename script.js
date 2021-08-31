@@ -47,9 +47,26 @@ let myLibrary = [Book1, Book2, Book3];
 // title author total pages Have you read it?
 const bookContainerDOM = document.querySelector('.book-container');
 
-myLibrary.forEach(book => {
+
+function displayBooks(book) {
     const bookDiv = createBookDiv();
     populateBookDiv(bookDiv, book);
     bookContainerDOM.appendChild(bookDiv);
+}
 
-});
+myLibrary.forEach(displayBooks);
+
+let modalBtn = document.getElementById("modal-btn")
+let modal = document.querySelector(".modal")
+let closeBtn = document.querySelector(".close-btn")
+modalBtn.onclick = function() {
+    modal.style.display = "block"
+}
+closeBtn.onclick = function() {
+    modal.style.display = "none"
+}
+window.onclick = function(e) {
+    if (e.target == modal) {
+        modal.style.display = "none"
+    }
+}
