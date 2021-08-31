@@ -1,6 +1,3 @@
-let myLibrary = [Book1, Book2, Book3];
-// title author total pages Have you read it?
-
 function Book(title, author, pages, haveReadIT) {
     this.title = title;
     this.author = author;
@@ -12,8 +9,36 @@ function addBookToLibrary(book) {
     myLibrary.push(book);
 }
 
+function createBookDiv() {
+    const div = document.createElement('div');
+    div.classList.add('book');
+    return div
+}
+
+function populateBookDiv(div, book) {
+    const titlePara = document.createElement('p');
+    const authorPara = document.createElement('p');
+    const pagesPara = document.createElement('p');
+    const haveReadITPara = document.createElement('p');
+    titlePara.textContent = book.title;
+    authorPara.textContent = book.author;
+    pagesPara.textContent = book.pages;
+    haveReadITPara.textContent = book.haveReadIT;
+    div.appendChild(titlePara);
+    div.appendChild(authorPara);
+    div.appendChild(pagesPara);
+    div.appendChild(haveReadITPara);
+}
 const Book1 = new Book('fart', 'fastfary', 123, false);
 const Book2 = new Book('fart2', 'fastfary', 123, false);
 const Book3 = new Book('fart3', 'fastfary', 123, false);
-
+let myLibrary = [Book1, Book2, Book3];
+// title author total pages Have you read it?
 const bookContainerDOM = document.querySelector('.book-container');
+
+myLibrary.forEach(book => {
+    const bookDiv = createBookDiv();
+    populateBookDiv(bookDiv, book);
+    bookContainerDOM.appendChild(bookDiv);
+
+});
