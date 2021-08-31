@@ -20,10 +20,10 @@ function populateBookDiv(div, book) {
     const authorPara = document.createElement('p');
     const pagesPara = document.createElement('p');
     const haveReadITPara = document.createElement('p');
-    titlePara.textContent = book.title;
-    authorPara.textContent = book.author;
-    pagesPara.textContent = book.pages;
-    haveReadITPara.textContent = book.haveReadIT;
+    titlePara.textContent = `Title: ${book.title}`;
+    authorPara.textContent = `Author: ${book.title}`;
+    pagesPara.textContent = `Pages: ${book.title}`;
+    haveReadITPara.textContent = `Have read it: ${book.haveReadIT}`;
     div.appendChild(titlePara);
     div.appendChild(authorPara);
     div.appendChild(pagesPara);
