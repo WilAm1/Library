@@ -93,13 +93,11 @@ const getFormInput = function() {
 }
 
 submitFormBtnDOM.addEventListener('click', (e) => {
-    e.preventDefault();
     const book = getFormInput();
     addBookToLibrary(book);
     refreshLibrary();
     console.log(myLibrary);
     modal.style.display = "none"
-    return false
 
 });
 
