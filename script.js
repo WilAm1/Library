@@ -111,18 +111,18 @@ window.onclick = function(e) {
 const submitFormBtnDOM = document.querySelector('#submit-form-btn');
 
 const getFormInput = function() {
-    const name = document.getElementById('name');
-    const author = document.getElementById('author');
-    const pages = document.getElementById('pages');
+    const name = document.getElementById('name').value;
+    const author = document.getElementById('author').value;
+    const pages = document.getElementById('pages').value;
     const readIt = (document.getElementById('reading').checked) ? true : false;
-    if (checkValidInput(name.value, author.value, pages.value) == false) {
-        errorElement.style.display = 'block';
+    if (checkValidInput(name, author, pages) == false) {
+        errorElement.classList.add('active');
         return
     } else {
-        const book = new Book(name.value, author.value, pages.value, readIt);
+        const book = new Book(name, author, pages, readIt);
         const form = document.querySelector('#form');
         form.reset();
-        errorElement.style.display = 'none';
+        errorElement.classList.remove('active');
         return book
     }
 
@@ -137,7 +137,6 @@ submitFormBtnDOM.addEventListener('click', () => {
 
 });
 const errorElement = document.querySelector('.error');
-errorElement.style.display = 'none';
 
 function checkValidInput(name, author, pages) {
     console.log((name !== '' && author !== '' && (pages !== '' && Number(pages) > 0)))
