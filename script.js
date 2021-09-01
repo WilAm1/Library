@@ -9,15 +9,33 @@ Book.prototype.toggleRead = function() {
     this.finishedReading = (this.finishedReading) ? false : true
     return this.finishedReading
 };
-
-
 const addBookToLibrary = function(book) {
     myLibrary.push(book);
+    saveToLocalStorage();
 }
 
-const Book1 = new Book('Sample', 'Jonny', 123, false);
-let myLibrary = [Book1];
+const Book1 = new Book('Sample Book Title', 'WilAmI', 1, true);
+// localStorage.setItem('Book1', JSON.stringify(Book1));
+let myLibrary = getLocalStorage() || [Book1];
 
+
+function saveToLocalStorage() {
+    localStorage.clear();
+    localStorage.setItem('library', JSON.stringify(myLibrary));
+}
+
+function getLocalStorage() {
+    const library = JSON.parse(localStorage.getItem('library'));
+    if (!library) return
+    library.map(book => {
+        book.__proto__ = Object.create(Book.prototype);
+        return book
+    })
+    console.table(library);
+    return library
+
+}
+console.log(localStorage);
 
 const createBookDiv = function(arrayNum) {
     const div = document.createElement('div');
@@ -30,7 +48,10 @@ const removeBook = function(e) {
     const bookNumber = e.target.getAttribute('data-array-number');
     // Removes the book
     myLibrary = myLibrary.filter((book) => book !== myLibrary[bookNumber]);
-    refreshLibrary()
+    refreshLibrary();
+    saveToLocalStorage();
+
+
 
 };
 
@@ -53,11 +74,11 @@ const isFinishedIcon = function(bool) {
     return (bool) ? ' FINISHED READING: ✅' : ' FINISHED READING: ❌'
 };
 const toggleReadStatus = function(e) {
-    const isReadingElement = document.querySelector(`.finishedReading-${bookNumber}`);
     const bookNumber = e.target.getAttribute('data-array-number');
+    const isReadingElement = document.querySelector(`.finishedReading-${bookNumber}`);
+    console.log(myLibrary[bookNumber].finishedReading);
     const isReading = myLibrary[bookNumber].toggleRead();
     isReadingElement.textContent = isFinishedIcon(isReading);
-    console.log(myLibrary[bookNumber].finishedReading);
 };
 
 const populateBookDiv = function(div, book, arrayNumber) {
@@ -92,6 +113,7 @@ function refreshLibrary() {
     bookLibrary.classList.add('book-library');
     libraryContainer.appendChild(bookLibrary);
     displayBooks(myLibrary, bookLibrary);
+
 }
 
 // Modal
@@ -128,9 +150,9 @@ const getFormInput = function() {
         return
     }
 
+    const form = document.querySelector('#form');
     form.reset();
     const book = new Book(name, author, pages, readIt);
-    const form = document.querySelector('#form');
     errorElement.classList.remove('active');
 
     return book
@@ -139,10 +161,10 @@ const getFormInput = function() {
 submitFormBtnDOM.addEventListener('click', () => {
     const newBook = getFormInput();
     if (!newBook) return
-    addBookToLibrary(newBoo);
+    addBookToLibrary(newBook);
     refreshLibrary();
+    saveToLocalStorage();
     modal.style.display = "none"
-
 });
 
 refreshLibrary();
