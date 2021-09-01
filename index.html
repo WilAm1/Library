@@ -22,13 +22,14 @@
                 <h3>Add Book</h3>
             </div>
             <form id="form" action="#">
-                <label for="name">Title: <input type="text" id="name" name="Name"></label>
-                <label for="author">Author: <input type="text" id="author" name="Author"></label>
-                <label for="number">Pages: <input type="number" id="pages" name="Pages"></label>
+                <label for="name">Title: <input type="text" id="name" name="Name" required></label>
+                <label for="author">Author: <input type="text" id="author" name="Author" required></label>
+                <label for="number">Pages: <input type="number" id="pages" name="Pages" required></label>
 
                 <label for="reading">Finished Reading
                     <input type="checkbox" name="finishedReading" id="reading" value="true">
                 </label>
+                <span class="error">Please Fill All and make It Valid</span>
                 <button type="button" class="submit-form-btn" id="submit-form-btn">Submit</button>
             </form>
         </div>

@@ -16,10 +16,8 @@ function addBookToLibrary(book) {
 
 
 const Book1 = new Book('Sample', 'Jonny', 123, false);
-
 let myLibrary = [Book1];
-// title author total pages Have you read it?
-const bookContainerDOM = document.querySelector('.book-container');
+
 
 
 function createBookDiv(arrayNum) {
@@ -47,7 +45,7 @@ const toggleReadStatus = function(e) {
     const isReading = myLibrary[bookNumber].toggleRead();
     const paraIsReading = document.querySelector(`.finishedReading-${bookNumber}`);
     paraIsReading.textContent = isFinishedIcon(isReading);
-    e.target.textContent = (isReading) ? 'READ' : 'NOT READ';
+    // e.target.textContent = (isReading) ? 'READ' : 'NOT READ';
     console.log(myLibrary[bookNumber].finishedReading);
 }
 
@@ -55,7 +53,7 @@ function addBookBtns(div, arrNum) {
     const removeBtn = document.createElement('button');
     const readBtn = document.createElement('button');
     removeBtn.textContent = 'REMOVE';
-    readBtn.textContent = "READ";
+    readBtn.textContent = "HAVE READ IT";
     removeBtn.classList.add('remove-book');
     removeBtn.setAttribute(`data-array-number`, arrNum);
     readBtn.classList.add('toggle=read-book');
@@ -67,7 +65,7 @@ function addBookBtns(div, arrNum) {
 }
 
 function isFinishedIcon(bool) {
-    return (bool) ? ' FINISHED READING: ✅' : ' FINISHED READING: ❎'
+    return (bool) ? ' FINISHED READING: ✅' : ' FINISHED READING: ❌'
 }
 
 function populateBookDiv(div, book, arrayNumber) {
@@ -87,6 +85,7 @@ function populateBookDiv(div, book, arrayNumber) {
 }
 
 function refreshLibrary() {
+    const bookContainerDOM = document.querySelector('.book-container');
     bookContainerDOM.firstChild.remove();
     const bookLibrary = document.createElement('div');
     bookLibrary.classList.add('book-library');
@@ -94,9 +93,9 @@ function refreshLibrary() {
     displayBooks(myLibrary, bookLibrary);
 }
 // Modal
-let modalBtn = document.getElementById("modal-btn")
-let modal = document.querySelector(".modal")
-let closeBtn = document.querySelector(".close-btn")
+const modalBtn = document.getElementById("modal-btn")
+const modal = document.querySelector(".modal")
+const closeBtn = document.querySelector(".close-btn")
 modalBtn.onclick = function() {
     modal.style.display = "block"
 }
@@ -116,18 +115,32 @@ const getFormInput = function() {
     const author = document.getElementById('author');
     const pages = document.getElementById('pages');
     const readIt = (document.getElementById('reading').checked) ? true : false;
-    const book = new Book(name.value, author.value, +pages.value, readIt);
-    const form = document.querySelector('#form');
-    form.reset();
-    return book
+    if (checkValidInput(name.value, author.value, pages.value) == false) {
+        errorElement.style.display = 'block';
+        return
+    } else {
+        const book = new Book(name.value, author.value, pages.value, readIt);
+        const form = document.querySelector('#form');
+        form.reset();
+        errorElement.style.display = 'none';
+        return book
+    }
+
 }
 
-submitFormBtnDOM.addEventListener('click', (e) => {
+submitFormBtnDOM.addEventListener('click', () => {
     const book = getFormInput();
+    if (!book) return
     addBookToLibrary(book);
     refreshLibrary();
     modal.style.display = "none"
 
 });
+const errorElement = document.querySelector('.error');
+errorElement.style.display = 'none';
 
+function checkValidInput(name, author, pages) {
+    console.log((name !== '' && author !== '' && (pages !== '' && Number(pages) > 0)))
+    return (name !== '' && author !== '' && (pages !== '' && Number(pages) > 0))
+}
 refreshLibrary();
