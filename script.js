@@ -18,42 +18,49 @@ let myLibrary = [Book1];
 const bookContainerDOM = document.querySelector('.book-container');
 
 
-function displayBooks(books, library) {
-    for (let i = 0; i < books.length; i++) {
-        const bookDiv = createBookDiv();
-        populateBookDiv(bookDiv, books[i]);
-        library.appendChild(bookDiv);
-    }
-}
-
 function createBookDiv() {
     const div = document.createElement('div');
     div.classList.add('book');
     return div
 }
 
-function populateBookDiv(div, book) {
+function displayBooks(books, library) {
+    for (let i = 0; i < books.length; i++) {
+        const bookDiv = createBookDiv();
+        populateBookDiv(bookDiv, books[i], i);
+        library.appendChild(bookDiv);
+    }
+}
+const removeBook = function() {
+    alert('hellos')
+};
+
+function addBookBtns(div, arrNum) {
+    const removeBtn = document.createElement('button');
+    const readBtn = document.createElement('button');
+    removeBtn.textContent = 'REMOVE';
+    readBtn.textContent = "READ";
+    removeBtn.classList.add('remove-book');
+    removeBtn.setAttribute(`data-${arrNum}`, "democlass")
+    readBtn.classList.add('toggle=read-book');
+    div.appendChild(removeBtn);
+    div.appendChild(readBtn);
+    removeBtn.onclick = removeBook;
+
+}
+
+function populateBookDiv(div, book, arrayNumber) {
     for (const prop in book) {
         if (book.hasOwnProperty(prop)) {
             const paragraphElement = document.createElement('p');
             paragraphElement.classList.add(prop);
             paragraphElement.textContent = (prop === 'finishedReading') ?
                 `FINISHED READING: ${book[prop] ? '✅' : '❎'}` : `${prop.toUpperCase()}: ${book[prop]}`;
+            // Inserts before the remove and add buttons.
             div.appendChild(paragraphElement);
         }
     }
-    // const titlePara = document.createElement('p');
-    // const authorPara = document.createElement('p');
-    // const pagesPara = document.createElement('p');
-    // const haveReadITPara = document.createElement('p');
-    // titlePara.textContent = `Title: ${book.title}`;
-    // authorPara.textContent = `Author: ${book.title}`;
-    // pagesPara.textContent = `Pages: ${book.title}`;
-    // haveReadITPara.textContent = `Have read it: ${book.haveReadIT}`;
-    // div.appendChild(titlePara);
-    // div.appendChild(authorPara);
-    // div.appendChild(pagesPara);
-    // div.appendChild(haveReadITPara);
+    addBookBtns(div, arrayNumber);
 }
 
 function refreshLibrary() {
