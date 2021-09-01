@@ -41,21 +41,27 @@ function populateBookDiv(div, book) {
 }
 
 const Book1 = new Book('fart', 'fastfary', 123, false);
-const Book2 = new Book('fart2', 'fastfary', 123, false);
-const Book3 = new Book('fart3', 'fastfary', 123, false);
-let myLibrary = [Book1, Book2, Book3];
+// const Book2 = new Book('fart2', 'fastfary', 123, false);
+// const Book3 = new Book('fart3', 'fastfary', 123, false);
+let myLibrary = [Book1];
 // title author total pages Have you read it?
 const bookContainerDOM = document.querySelector('.book-container');
 
 
-function displayBooks(book) {
-    const bookDiv = createBookDiv();
-    populateBookDiv(bookDiv, book);
-    bookContainerDOM.appendChild(bookDiv);
+function displayBooks(books, library) {
+    for (let i = 0; i < books.length; i++) {
+        const bookDiv = createBookDiv();
+        populateBookDiv(bookDiv, books[i]);
+        library.appendChild(bookDiv);
+    }
 }
 
 function refreshLibrary() {
-    myLibrary.forEach(displayBooks);
+    bookContainerDOM.firstChild.remove();
+    const bookLibrary = document.createElement('div');
+    bookLibrary.classList.add('book-library');
+    bookContainerDOM.appendChild(bookLibrary);
+    displayBooks(myLibrary, bookLibrary);
 }
 
 let modalBtn = document.getElementById("modal-btn")
@@ -81,8 +87,20 @@ const getFormInput = function() {
     const pages = document.getElementById('pages');
     const readIt = (document.getElementById('reading').checked) ? true : false;
     const book = new Book(name.value, author.value, +pages.value, readIt);
-    console.log(book);
+    const form = document.querySelector('#form');
+    form.reset();
+    return book
 }
 
-submitFormBtnDOM.onclick = getFormInput
-refreshLibrary()
+submitFormBtnDOM.addEventListener('click', (e) => {
+    e.preventDefault();
+    const book = getFormInput();
+    addBookToLibrary(book);
+    refreshLibrary();
+    console.log(myLibrary);
+    modal.style.display = "none"
+    return false
+
+});
+
+refreshLibrary();
