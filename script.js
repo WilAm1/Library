@@ -6,7 +6,8 @@ function Book(title, author, pages, haveReadIT) {
 }
 
 Book.prototype.toggleRead = function() {
-    this.finishedReading = (this.finishedReading) ? false : true
+    this.finishedReading = (this.finishedReading) ? false : true;
+    saveToLocalStorage();
     return this.finishedReading
 };
 const addBookToLibrary = function(book) {
@@ -27,16 +28,17 @@ function saveToLocalStorage() {
 function getLocalStorage() {
     const library = JSON.parse(localStorage.getItem('library'));
     if (!library) return
-    library.map(book => {
-        book.__proto__ = Object.create(Book.prototype);
-        return book
+    console.log(library)
+    return library.map(book => {
+        console.log(Book.prototype.isPrototypeOf(book));
+        console.log(JSONToBook(book));
+        return JSONToBook(book)
     })
-    console.table(library);
-    return library
-
 }
-console.log(localStorage);
 
+function JSONToBook(book) {
+    return new Book(book.title, book.author, book.pages, book.finishedReading)
+}
 const createBookDiv = function(arrayNum) {
     const div = document.createElement('div');
     div.classList.add('book');
