@@ -31,8 +31,11 @@ function displayBooks(books, library) {
         library.appendChild(bookDiv);
     }
 }
-const removeBook = function() {
-    alert('hellos')
+const removeBook = function(e) {
+    const bookNumber = e.target.getAttribute('data-array-number');
+    myLibrary = myLibrary.filter((book) => book !== myLibrary[bookNumber]);
+    refreshLibrary()
+
 };
 
 function addBookBtns(div, arrNum) {
@@ -41,7 +44,7 @@ function addBookBtns(div, arrNum) {
     removeBtn.textContent = 'REMOVE';
     readBtn.textContent = "READ";
     removeBtn.classList.add('remove-book');
-    removeBtn.setAttribute(`data-${arrNum}`, "democlass")
+    removeBtn.setAttribute(`data-array-number`, arrNum)
     readBtn.classList.add('toggle=read-book');
     div.appendChild(removeBtn);
     div.appendChild(readBtn);
