@@ -6,6 +6,7 @@ function Book(title, author, pages, haveReadIT) {
 }
 Book.prototype.toggleRead = function() {
     this.finishedReading = (this.finishedReading) ? false : true
+    return this.finishedReading
 }
 
 function addBookToLibrary(book) {
@@ -21,15 +22,16 @@ let myLibrary = [Book1];
 const bookContainerDOM = document.querySelector('.book-container');
 
 
-function createBookDiv() {
+function createBookDiv(arrayNum) {
     const div = document.createElement('div');
     div.classList.add('book');
+    div.classList.add(`book-${arrayNum}`);
     return div
 }
 
 function displayBooks(books, library) {
     for (let i = 0; i < books.length; i++) {
-        const bookDiv = createBookDiv();
+        const bookDiv = createBookDiv(i);
         populateBookDiv(bookDiv, books[i], i);
         library.appendChild(bookDiv);
     }
@@ -42,7 +44,10 @@ const removeBook = function(e) {
 };
 const toggleReadStatus = function(e) {
     const bookNumber = e.target.getAttribute('data-array-number');
-    myLibrary[bookNumber].toggleRead()
+    const isReading = myLibrary[bookNumber].toggleRead();
+    const paraIsReading = document.querySelector(`.finishedReading-${bookNumber}`);
+    paraIsReading.textContent = isFinishedIcon(isReading);
+    e.target.textContent = (isReading) ? 'READ' : 'NOT READ';
     console.log(myLibrary[bookNumber].finishedReading);
 }
 
@@ -62,7 +67,7 @@ function addBookBtns(div, arrNum) {
 }
 
 function isFinishedIcon(bool) {
-    return (bool) ? '✅' : '❎'
+    return (bool) ? ' FINISHED READING: ✅' : ' FINISHED READING: ❎'
 }
 
 function populateBookDiv(div, book, arrayNumber) {
@@ -70,9 +75,10 @@ function populateBookDiv(div, book, arrayNumber) {
         if (book.hasOwnProperty(prop)) {
             const paragraphElement = document.createElement('p');
             paragraphElement.classList.add(prop);
+            paragraphElement.classList.add(`${prop}-${arrayNumber}`);
             // 
             paragraphElement.textContent = (prop === 'finishedReading') ?
-                `FINISHED READING: ${isFinishedIcon(book[prop])}` : `${prop.toUpperCase()}: ${book[prop]}`;
+                `${isFinishedIcon(book[prop])}` : `${prop.toUpperCase()}: ${book[prop]}`;
             // Inserts before the remove and add buttons.
             div.appendChild(paragraphElement);
         }
