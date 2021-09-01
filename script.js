@@ -15,10 +15,10 @@ const addBookToLibrary = function(book) {
     saveToLocalStorage();
 }
 
-const Book1 = new Book('Sample Book Title', 'WilAmI', 1, true);
-// localStorage.setItem('Book1', JSON.stringify(Book1));
-let myLibrary = getLocalStorage() || [Book1];
+// const Book1 = new Book('Sample Book Title', 'WilAmI', '123', true);
 
+let myLibrary = getLocalStorage();
+console.log(getLocalStorage());
 
 function saveToLocalStorage() {
     localStorage.clear();
@@ -27,11 +27,8 @@ function saveToLocalStorage() {
 
 function getLocalStorage() {
     const library = JSON.parse(localStorage.getItem('library'));
-    if (!library) return
-    console.log(library)
+    if (!library) return []
     return library.map(book => {
-        console.log(Book.prototype.isPrototypeOf(book));
-        console.log(JSONToBook(book));
         return JSONToBook(book)
     })
 }
@@ -52,9 +49,6 @@ const removeBook = function(e) {
     myLibrary = myLibrary.filter((book) => book !== myLibrary[bookNumber]);
     refreshLibrary();
     saveToLocalStorage();
-
-
-
 };
 
 const addBookBtns = function(div, arrNum) {
