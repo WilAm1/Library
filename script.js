@@ -9,6 +9,23 @@ function addBookToLibrary(book) {
     myLibrary.push(book);
 }
 
+
+
+const Book1 = new Book('fart', 'fastfary', 123, false);
+
+let myLibrary = [Book1];
+// title author total pages Have you read it?
+const bookContainerDOM = document.querySelector('.book-container');
+
+
+function displayBooks(books, library) {
+    for (let i = 0; i < books.length; i++) {
+        const bookDiv = createBookDiv();
+        populateBookDiv(bookDiv, books[i]);
+        library.appendChild(bookDiv);
+    }
+}
+
 function createBookDiv() {
     const div = document.createElement('div');
     div.classList.add('book');
@@ -21,10 +38,9 @@ function populateBookDiv(div, book) {
             const paragraphElement = document.createElement('p');
             paragraphElement.classList.add(prop);
             paragraphElement.textContent = (prop === 'finishedReading') ?
-                `FINISHED READING: ${book[prop]}` : `${prop.toUpperCase()}: ${book[prop]}`;
+                `FINISHED READING: ${book[prop] ? '✅' : '❎'}` : `${prop.toUpperCase()}: ${book[prop]}`;
             div.appendChild(paragraphElement);
         }
-
     }
     // const titlePara = document.createElement('p');
     // const authorPara = document.createElement('p');
@@ -40,22 +56,6 @@ function populateBookDiv(div, book) {
     // div.appendChild(haveReadITPara);
 }
 
-const Book1 = new Book('fart', 'fastfary', 123, false);
-// const Book2 = new Book('fart2', 'fastfary', 123, false);
-// const Book3 = new Book('fart3', 'fastfary', 123, false);
-let myLibrary = [Book1];
-// title author total pages Have you read it?
-const bookContainerDOM = document.querySelector('.book-container');
-
-
-function displayBooks(books, library) {
-    for (let i = 0; i < books.length; i++) {
-        const bookDiv = createBookDiv();
-        populateBookDiv(bookDiv, books[i]);
-        library.appendChild(bookDiv);
-    }
-}
-
 function refreshLibrary() {
     bookContainerDOM.firstChild.remove();
     const bookLibrary = document.createElement('div');
@@ -63,7 +63,7 @@ function refreshLibrary() {
     bookContainerDOM.appendChild(bookLibrary);
     displayBooks(myLibrary, bookLibrary);
 }
-
+// Modal
 let modalBtn = document.getElementById("modal-btn")
 let modal = document.querySelector(".modal")
 let closeBtn = document.querySelector(".close-btn")
@@ -96,7 +96,6 @@ submitFormBtnDOM.addEventListener('click', (e) => {
     const book = getFormInput();
     addBookToLibrary(book);
     refreshLibrary();
-    console.log(myLibrary);
     modal.style.display = "none"
 
 });
