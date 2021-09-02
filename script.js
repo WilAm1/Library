@@ -49,18 +49,22 @@ const removeBook = function(e) {
 };
 
 const addBookBtns = function(div, arrNum) {
+    const btnsContainer = document.createElement('div');
+    btnsContainer.classList.add('book-btn-container');
     const removeBtn = document.createElement('button');
     removeBtn.textContent = 'REMOVE';
     removeBtn.setAttribute(`data-array-number`, arrNum);
     removeBtn.classList.add('remove-book');
     removeBtn.onclick = removeBook;
-    div.appendChild(removeBtn);
+    btnsContainer.appendChild(removeBtn);
     const readBtn = document.createElement('button');
     readBtn.textContent = "HAVE READ IT";
     readBtn.classList.add('toggle=read-book');
     readBtn.setAttribute(`data-array-number`, arrNum);
     readBtn.onclick = toggleReadStatus;
-    div.appendChild(readBtn);
+    btnsContainer.appendChild(readBtn);
+
+    div.appendChild(btnsContainer);
 }
 
 const isFinishedIcon = function(bool) {

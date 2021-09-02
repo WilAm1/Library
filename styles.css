@@ -1,15 +1,16 @@
 body {
-    margin: 0;
-    padding: 0;
+    margin: 40px 0;
+    padding: 0 10px;
     min-height: 100vh;
     background-color: #EEEEEE;
+    color: #393E46;
+    font-family: 'Roboto', 'Arial', sans-serif;
 }
 
-.book {
-    border: black 2px solid;
-    background-color: #393E46;
-    height: 200px;
-    width: 200px;
+h1 {
+    font-weight: 900;
+    font-size: 4em;
+    margin: 0 5vw;
 }
 
 .modal {
@@ -34,8 +35,10 @@ body {
 }
 
 .modal-content {
+    font-size: 1.2em;
     position: relative;
     background-color: white;
+    border: 1px solid #222831;
     padding: 30px;
     margin: 5vh auto;
     width: 55%;
@@ -46,14 +49,47 @@ body {
 }
 
 #modal-btn {
+    border: 2px solid #222831;
+    color: #222831;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 4em;
     background-color: #00ADB5;
+    border-radius: 100%;
+    height: 70px;
+    width: 70px;
+    position: fixed;
+    bottom: 80px;
+    right: 80px;
+}
+
+#modal-btn:hover {
+    transform: scale(1.15);
+    /* color: #EEEEEE; */
+    border-color: #393E46;
+}
+
+#modal-btn:active {
+    transform: scale(.9);
 }
 
 #form {
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
+    justify-content: space-evenly;
     width: 100%;
+}
+
+#form label {
+    margin: 10px auto;
+    text-align: left;
+}
+
+input[type=text],
+input[type=number] {
+    height: 25px;
 }
 
 .close-btn {
@@ -92,36 +128,52 @@ body {
 
 /* Book Container */
 
-.library-container {
-    background-color: #00ADB5;
+
+/* .library-container {
+    background-color: #222831;
     width: 70vw;
-    margin: 0 auto;
-    padding: 10px;
-}
+    margin: 50px auto;
+    padding: 5px;
+} */
 
 .book-library {
-    background-color: #222831;
+    /* background-color: #222831; */
     display: flex;
     flex-flow: row wrap;
     justify-content: space-around;
     width: 80%;
-    margin: 10px auto;
+    margin: 50px auto;
 }
 
 
 /* Book */
 
 .book {
-    border: solid #EEEEEE 2px;
+    font-size: 1em;
+    display: flex;
+    flex-flow: column nowrap;
+    margin: 10px;
+    background-color: #393E46;
+    border: solid #222831 5px;
+    border-radius: 10px;
     height: 300px;
     width: 300px;
     text-align: center;
-    margin: 10px;
     color: #EEEEEE;
 }
 
 .book button {
+    padding: 0;
     margin: 10px;
+    width: 100px;
+    height: 50px;
+    border-radius: 20px;
+}
+
+.book-btn-container {
+    display: flex;
+    flex-flow: wrap row;
+    justify-content: space-evenly;
 }
 
 .error {
