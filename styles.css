@@ -1,5 +1,13 @@
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    background-color: #EEEEEE;
+}
+
 .book {
     border: black 2px solid;
+    background-color: #393E46;
     height: 200px;
     width: 200px;
 }
@@ -35,6 +43,10 @@
     -webkit-animation-duration: 0.4s;
     animation-name: animatetop;
     animation-duration: 0.4s
+}
+
+#modal-btn {
+    background-color: #00ADB5;
 }
 
 #form {
@@ -80,8 +92,15 @@
 
 /* Book Container */
 
+.library-container {
+    background-color: #00ADB5;
+    width: 70vw;
+    margin: 0 auto;
+    padding: 10px;
+}
+
 .book-library {
-    background-color: bisque;
+    background-color: #222831;
     display: flex;
     flex-flow: row wrap;
     justify-content: space-around;
@@ -93,10 +112,16 @@
 /* Book */
 
 .book {
+    border: solid #EEEEEE 2px;
     height: 300px;
     width: 300px;
     text-align: center;
-    margin: 10px
+    margin: 10px;
+    color: #EEEEEE;
+}
+
+.book button {
+    margin: 10px;
 }
 
 .error {
