@@ -10,32 +10,29 @@ Book.prototype.toggleRead = function() {
     saveToLocalStorage();
     return this.finishedReading
 };
+
+// localStorage Functions
 const addBookToLibrary = function(book) {
     myLibrary.push(book);
     saveToLocalStorage();
 }
 
-// const Book1 = new Book('Sample Book Title', 'WilAmI', '123', true);
-
-let myLibrary = getLocalStorage();
-console.log(getLocalStorage());
-
 function saveToLocalStorage() {
-    localStorage.clear();
     localStorage.setItem('library', JSON.stringify(myLibrary));
+}
+
+const JSONToBook = function(book) {
+    return new Book(book.title, book.author, book.pages, book.finishedReading)
 }
 
 function getLocalStorage() {
     const library = JSON.parse(localStorage.getItem('library'));
     if (!library) return []
-    return library.map(book => {
-        return JSONToBook(book)
-    })
+    return library.map(book => JSONToBook(book))
 }
 
-function JSONToBook(book) {
-    return new Book(book.title, book.author, book.pages, book.finishedReading)
-}
+
+// Book div and its content
 const createBookDiv = function(arrayNum) {
     const div = document.createElement('div');
     div.classList.add('book');
@@ -69,14 +66,15 @@ const addBookBtns = function(div, arrNum) {
 const isFinishedIcon = function(bool) {
     return (bool) ? ' FINISHED READING: ✅' : ' FINISHED READING: ❌'
 };
+
 const toggleReadStatus = function(e) {
     const bookNumber = e.target.getAttribute('data-array-number');
-    const isReadingElement = document.querySelector(`.finishedReading-${bookNumber}`);
-    console.log(myLibrary[bookNumber].finishedReading);
     const isReading = myLibrary[bookNumber].toggleRead();
+    const isReadingElement = document.querySelector(`.finishedReading-${bookNumber}`);
     isReadingElement.textContent = isFinishedIcon(isReading);
 };
 
+// Add book object content to its div element
 const populateBookDiv = function(div, book, arrayNumber) {
     for (const prop in book) {
         if (book.hasOwnProperty(prop)) {
@@ -86,14 +84,15 @@ const populateBookDiv = function(div, book, arrayNumber) {
             // adds the property to the paragraph text
             paragraphElement.textContent = (prop === 'finishedReading') ?
                 `${isFinishedIcon(book[prop])}` : `${prop.toUpperCase()}: ${book[prop]}`;
-            // Inserts before the remove and add buttons.
+            // Inserts before the buttons of remove and add .
             div.appendChild(paragraphElement);
         }
     }
     addBookBtns(div, arrayNumber);
 }
+
 const displayBooks = function(books, library) {
-    // loops to the array of books and create seperate div for each book
+    // loops to the array of book objects and create seperate div for each book
     for (let i = 0; i < books.length; i++) {
         const bookDiv = createBookDiv(i);
         populateBookDiv(bookDiv, books[i], i);
@@ -101,16 +100,19 @@ const displayBooks = function(books, library) {
     }
 }
 
+
+
 function refreshLibrary() {
     // Works by removing the previous child element of the container and filling it with updated one
-    const libraryContainer = document.querySelector('.book-container');
+    const libraryContainer = document.querySelector('.library-container');
     libraryContainer.firstChild.remove();
     const bookLibrary = document.createElement('div');
     bookLibrary.classList.add('book-library');
-    libraryContainer.appendChild(bookLibrary);
     displayBooks(myLibrary, bookLibrary);
+    libraryContainer.appendChild(bookLibrary);
 
 }
+
 
 // Modal
 const modalBtn = document.getElementById("modal-btn");
@@ -128,8 +130,7 @@ window.onclick = function(e) {
     }
 };
 
-
-const submitFormBtnDOM = document.querySelector('#submit-form-btn');
+// Form and Submit Input
 const checkValidInput = function(name, author, pages) {
     return (name !== '' && author !== '' && (pages !== '' && Number(pages) > 0))
 }
@@ -145,15 +146,14 @@ const getFormInput = function() {
         errorElement.classList.add('active');
         return
     }
-
     const form = document.querySelector('#form');
     form.reset();
     const book = new Book(name, author, pages, readIt);
     errorElement.classList.remove('active');
-
     return book
 }
 
+const submitFormBtnDOM = document.querySelector('#submit-form-btn');
 submitFormBtnDOM.addEventListener('click', () => {
     const newBook = getFormInput();
     if (!newBook) return
@@ -162,5 +162,10 @@ submitFormBtnDOM.addEventListener('click', () => {
     saveToLocalStorage();
     modal.style.display = "none"
 });
+
+
+
+// const Book1 = new Book('Sample Book Title', 'WilAmI', '123', true);
+let myLibrary = getLocalStorage();
 
 refreshLibrary();
