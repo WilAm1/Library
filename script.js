@@ -1,8 +1,11 @@
-function Book(title, author, pages, haveReadIT) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.finishedReading = haveReadIT;
+class Book {
+    constructor(title, author, pages, haveReadIT) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.finishedReading = haveReadIT;
+
+    }
 }
 
 Book.prototype.toggleRead = function() {
