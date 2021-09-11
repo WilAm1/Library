@@ -6,13 +6,13 @@ class Book {
         this.finishedReading = haveReadIT;
 
     }
+    toggleRead() {
+        this.finishedReading = (this.finishedReading) ? false : true;
+
+        return this.finishedReading
+    };
 }
 
-Book.prototype.toggleRead = function() {
-    this.finishedReading = (this.finishedReading) ? false : true;
-    saveToLocalStorage();
-    return this.finishedReading
-};
 
 // localStorage Functions
 const addBookToLibrary = function(book) {
@@ -79,6 +79,7 @@ const toggleReadStatus = function(e) {
     const isReading = myLibrary[bookNumber].toggleRead();
     const isReadingElement = document.querySelector(`.finishedReading-${bookNumber}`);
     isReadingElement.textContent = isFinishedIcon(isReading);
+    saveToLocalStorage();
 };
 
 // Add book object content to its div element
