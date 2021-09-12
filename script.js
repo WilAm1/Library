@@ -1,15 +1,15 @@
 class Book {
-    constructor(title, author, pages, haveReadIT) {
+    constructor(title, author, pages, bool) {
         this.title = title;
         this.author = author;
         this.pages = pages;
-        this.finishedReading = haveReadIT;
+        this.finished = bool;
 
     }
     toggleRead() {
-        this.finishedReading = (this.finishedReading) ? false : true;
+        this.finished = (this.finished) ? false : true;
 
-        return this.finishedReading
+        return this.finished
     };
 }
 
@@ -25,7 +25,7 @@ function saveToLocalStorage() {
 }
 
 const JSONToBook = function(book) {
-    return new Book(book.title, book.author, book.pages, book.finishedReading)
+    return new Book(book.title, book.author, book.pages, book.finished)
 }
 
 function getLocalStorage() {
@@ -77,7 +77,7 @@ const isFinishedIcon = function(bool) {
 const toggleReadStatus = function(e) {
     const bookNumber = e.target.getAttribute('data-array-number');
     const isReading = myLibrary[bookNumber].toggleRead();
-    const isReadingElement = document.querySelector(`.finishedReading-${bookNumber}`);
+    const isReadingElement = document.querySelector(`.finished-${bookNumber}`);
     isReadingElement.textContent = isFinishedIcon(isReading);
     saveToLocalStorage();
 };
@@ -90,7 +90,7 @@ const populateBookDiv = function(div, book, arrayNumber) {
             paragraphElement.classList.add(prop);
             paragraphElement.classList.add(`${prop}-${arrayNumber}`);
             // adds the property to the paragraph text
-            paragraphElement.textContent = (prop === 'finishedReading') ?
+            paragraphElement.textContent = (prop === 'finished') ?
                 `${isFinishedIcon(book[prop])}` : `${prop.toUpperCase()}: ${book[prop]}`;
             // Inserts before the buttons of remove and add .
             div.appendChild(paragraphElement);
