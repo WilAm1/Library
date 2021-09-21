@@ -35,6 +35,11 @@ h1 {
     /* Black w/ opacity */
 }
 
+.modal-header {
+    width: 80%;
+    margin: 0 auto;
+}
+
 .modal-content {
     font-size: 1.2em;
     position: relative;
@@ -107,7 +112,17 @@ h1 {
     font-family: Arial, Helvetica, sans-serif;
 }
 
-#submit-form-btn {}
+#submit-form-btn:hover {
+    transform: scale(.95);
+    color: #00ADB5;
+    background-color: #EEEEEE;
+    border-color: #00ADB5;
+}
+
+#submit-form-btn:active {
+    transform: scale(1.2);
+    background-color: #393E46;
+}
 
 .close-btn {
     float: right;
