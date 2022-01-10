@@ -136,7 +136,6 @@ window.onclick = function (e) {
 const nameElem = document.getElementById("name");
 const author = document.getElementById("author");
 const pages = document.getElementById("pages");
-const readIt = document.getElementById("reading").checked ? true : false;
 const errorElement = document.querySelector(".error");
 const form = document.querySelector("#form");
 const submit = document.querySelector("#submit-form-btn");
@@ -147,15 +146,19 @@ const createErrorSibling = (parent) => {
   return elem;
 };
 
+// * True if every required input value is valid
 const checkBtnsValidity = () => {
   return requiredElements.every((elem) => {
     return elem.checkValidity();
   });
 };
+
+// * Toggles disabled attribute on submit Btn
 const toggleSubmitBtn = () => {
   submit.disabled = !checkBtnsValidity();
 };
-// Adds event listeners to each inputs
+
+// * Adds event listeners to each inputs
 requiredElements.forEach((elem) => {
   elem.addEventListener("input", ({ target }) => {
     const errorSibling =
@@ -171,6 +174,7 @@ requiredElements.forEach((elem) => {
   });
 });
 
+// * Shows the error using the sibling span element
 function showError(element, errorElem) {
   errorElem.textContent = element.validity.valueMissing
     ? `${element.name} must have value!`
@@ -183,30 +187,32 @@ function showError(element, errorElem) {
     : "Unknown Value";
 }
 
-form.addEventListener("submit", (e) => {
-  e.preventDefault();
-  e.target.reset();
-  toggleSubmitBtn();
-});
-
 const getFormInput = function () {
-  form.reset();
+  const values = requiredElements.reduce((acc, currentVal) => {
+    const tag = currentVal.id;
+    acc[tag] = currentVal.value;
+    return acc;
+  }, {});
+  const { name, author, pages } = values;
+  const readIt = document.getElementById("reading").checked ? true : false;
   const book = new Book(name, author, pages, readIt);
-  errorElement.classList.remove("active");
+  console.log(book, book.constructor);
   return book;
 };
 
-// const submitFormBtnDOM = document.querySelector("#submit-form-btn");
-// submitFormBtnDOM.addEventListener("click", () => {
-//   const newBook = getFormInput();
-//   if (!newBook) return;
-//   addBookToLibrary(newBook);
-//   refreshLibrary();
-//   saveToLocalStorage();
-//   modal.style.display = "none";
-// });
+// * Form event Listener
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  toggleSubmitBtn();
+  const newBook = getFormInput();
+  e.target.reset();
+  addBookToLibrary(newBook);
+  refreshLibrary();
+  saveToLocalStorage();
+  modal.style.display = "none";
+});
 
 // const Book1 = new Book('Sample Book Title', 'WilAmI', '123', true);
 let myLibrary = getLocalStorage();
 
-refreshLibrary();
+document.addEventListener("DOMContentLoaded", refreshLibrary);
