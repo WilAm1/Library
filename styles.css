@@ -1,212 +1,212 @@
 body {
-    margin: 40px 0;
-    padding: 0 10px;
-    min-height: 100vh;
-    background-color: #EEEEEE;
-    color: #393E46;
-    font-family: 'Roboto', 'Arial', sans-serif;
-    box-sizing: border-box;
+  margin: 40px 0;
+  padding: 0 10px;
+  min-height: 100vh;
+  background-color: #eeeeee;
+  color: #393e46;
+  font-family: "Roboto", "Arial", sans-serif;
+  box-sizing: border-box;
 }
 
 h1 {
-    font-weight: 900;
-    font-size: 4em;
-    margin: 0 5vw;
+  font-weight: 900;
+  font-size: 4em;
+  margin: 0 5vw;
 }
 
 .modal {
-    display: none;
-    /* Hidden by default */
-    position: fixed;
-    /* Stay in place */
-    z-index: 1;
-    /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%;
-    /* Full width */
-    height: 100%;
-    /* Full height */
-    overflow: auto;
-    /* Enable scroll if needed */
-    background-color: rgb(0, 0, 0);
-    /* Fallback color */
-    background-color: rgba(0, 0, 0, 0.4);
-    /* Black w/ opacity */
+  display: none;
+  /* Hidden by default */
+  position: fixed;
+  /* Stay in place */
+  z-index: 1;
+  /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: auto;
+  /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0);
+  /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Black w/ opacity */
 }
 
 .modal-header {
-    width: 80%;
-    margin: 0 auto;
+  width: 80%;
+  margin: 0 auto;
 }
 
 .modal-content {
-    font-size: 1.2em;
-    position: relative;
-    background-color: white;
-    border: 1px solid #222831;
-    padding: 30px;
-    margin: 5vh auto;
-    width: 55%;
-    -webkit-animation-name: animatetop;
-    -webkit-animation-duration: 0.4s;
-    animation-name: animatetop;
-    animation-duration: 0.4s
+  font-size: 1.2em;
+  position: relative;
+  background-color: white;
+  border: 1px solid #222831;
+  padding: 30px;
+  margin: 5vh auto;
+  width: 55%;
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animatetop;
+  animation-duration: 0.4s;
 }
 
 #modal-btn {
-    border: 2px solid #222831;
-    color: #222831;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 2em;
-    background-color: #00ADB5;
-    border-radius: 50%;
-    height: 70px;
-    width: 70px;
-    position: fixed;
-    bottom: 80px;
-    right: 80px;
+  border: 2px solid #222831;
+  color: #222831;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2em;
+  background-color: #00adb5;
+  border-radius: 50%;
+  height: 70px;
+  width: 70px;
+  position: fixed;
+  bottom: 80px;
+  right: 80px;
 }
 
 #modal-btn:hover {
-    transform: scale(1.1);
-    border-color: #393E46;
+  transform: scale(1.1);
+  border-color: #393e46;
 }
 
 #modal-btn:active {
-    transform: scale(.9);
-    background-color: #EEEEEE;
+  transform: scale(0.9);
+  background-color: #eeeeee;
 }
 
 #form {
-    display: flex;
-    flex-flow: column nowrap;
-    gap: 15px;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
 }
 
 #form div {
-    display: flex;
-    justify-content: space-between;
-    width: 80%;
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
 }
 
 #form div input {
-    height: 25px;
-    width: 80%;
-    font-size: 1em;
-    font-style: italic;
+  height: 25px;
+  width: 80%;
+  font-size: 1em;
+  font-style: italic;
 }
 
 #submit-form-btn {
-    padding: 8px 32px;
-    background-color: #00ADB5;
-    border: 2px #393E46 solid;
-    border-radius: 10px;
-    color: #EEEEEE;
-    font-size: .8em;
-    font-weight: bold;
-    font-family: Arial, Helvetica, sans-serif;
+  padding: 8px 32px;
+  background-color: #00adb5;
+  border: 2px #393e46 solid;
+  border-radius: 10px;
+  color: #eeeeee;
+  font-size: 0.8em;
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 #submit-form-btn:hover {
-    transform: scale(.95);
-    color: #00ADB5;
-    background-color: #EEEEEE;
-    border-color: #00ADB5;
+  transform: scale(0.95);
+  color: #00adb5;
+  background-color: #eeeeee;
+  border-color: #00adb5;
 }
 
 #submit-form-btn:active {
-    transform: scale(1.2);
-    background-color: #393E46;
+  transform: scale(1.2);
+  background-color: #393e46;
 }
 
 .close-btn {
-    float: right;
-    color: lightgray;
-    font-size: 24px;
-    font-weight: bold;
+  float: right;
+  color: lightgray;
+  font-size: 24px;
+  font-weight: bold;
 }
 
 .close-btn:hover {
-    color: darkgray;
+  color: darkgray;
 }
 
 @-webkit-keyframes animatetop {
-    from {
-        top: -300px;
-        opacity: 0
-    }
-    to {
-        top: 0;
-        opacity: 1
-    }
+  from {
+    top: -300px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
 }
 
 @keyframes animatetop {
-    from {
-        top: -300px;
-        opacity: 0
-    }
-    to {
-        top: 0;
-        opacity: 1
-    }
+  from {
+    top: -300px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
 }
-
 
 /* Book Container */
 
 .book-library {
-    /* background-color: #222831; */
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-around;
-    width: 80%;
-    margin: 50px auto;
+  /* background-color: #222831; */
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  width: 80%;
+  margin: 50px auto;
 }
-
 
 /* Book */
 
 .book {
-    font-size: 1em;
-    display: flex;
-    flex-flow: column nowrap;
-    margin: 10px;
-    background-color: #393E46;
-    border: solid #222831 5px;
-    border-radius: 10px;
-    height: 300px;
-    width: 300px;
-    text-align: center;
-    color: #EEEEEE;
+  font-size: 1em;
+  display: flex;
+  flex-flow: column nowrap;
+  margin: 10px;
+  background-color: #393e46;
+  border: solid #222831 5px;
+  border-radius: 10px;
+  height: 300px;
+  width: 300px;
+  text-align: center;
+  color: #eeeeee;
 }
 
 .book button {
-    padding: 0;
-    margin: 10px;
-    width: 100px;
-    height: 50px;
-    border-radius: 20px;
+  padding: 0;
+  margin: 10px;
+  width: 100px;
+  height: 50px;
+  border-radius: 20px;
 }
 
 .book-btn-container {
-    display: flex;
-    flex-flow: wrap row;
-    justify-content: space-evenly;
+  display: flex;
+  flex-flow: wrap row;
+  justify-content: space-evenly;
 }
 
 .error {
-    display: none;
+  /* display: none; */
+  background-color: #e44b30cb;
+  color: white;
+  border-radius: 20px;
+  padding: 0;
+  margin: 0;
 }
 
 .error.active {
-    display: block;
-    background-color: lightcoral;
-    color: floralwhite;
-    padding: 5px;
+  padding: 0.3em;
 }

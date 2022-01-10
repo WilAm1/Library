@@ -1,56 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Library</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;900&display=swap"
+      rel="stylesheet"
+    />
     <script src="script.js" defer></script>
-</head>
+  </head>
 
-<body>
+  <body>
     <h1 id="web-name">Library</h1>
     <div class="modal-btn-container">
-        <button id="modal-btn"><span>+</span></button>
+      <button id="modal-btn"><span>+</span></button>
     </div>
 
     <div class="modal">
-        <div class="modal-content">
-            <span class="close-btn">&times;</span>
-            <div class="modal-header">
-                <h3>Add Book</h3>
-            </div>
-            <form id="form" action="#">
-                <div class="form-input">
-                    <label for="name">Title: </label>
-                    <input type="text" id="name" name="Name" required>
-                </div>
-                <div class="form-input">
-                    <label for="author">Author: </label>
-                    <input type="text" id="author" name="Author" required>
-                </div>
-                <div class="form-input">
-                    <label for="number">Pages: </label>
-                    <input type="number" id="pages" name="Pages" required>
-
-                </div>
-                <label for="reading">Finished Reading
-                    <input type="checkbox" name="finishedReading" id="reading" value="true">
-                </label>
-                <span class="error">Please fill all blanks with valid values</span>
-                <button type="button" class="submit-form-btn" id="submit-form-btn">Submit</button>
-            </form>
+      <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <div class="modal-header">
+          <h3>Add Book</h3>
         </div>
+        <form id="form" action="#" novalidate>
+          <div class="form-input">
+            <label for="name">Title: </label>
+            <input type="text" id="name" name="Name" required minlength="5" />
+          </div>
+          <div class="form-input">
+            <label for="author">Author: </label>
+            <input
+              type="text"
+              id="author"
+              name="Author"
+              required
+              minlength="10"
+            />
+          </div>
+          <div class="form-input">
+            <label for="number">Pages: </label>
+            <input type="number" id="pages" name="Pages" required min="1" />
+          </div>
+          <label for="reading"
+            >Finished Reading
+            <input
+              type="checkbox"
+              name="finishedReading"
+              id="reading"
+              value="true"
+            />
+          </label>
+          <!-- Please fill all blanks with valid values -->
+          <span class="error"></span>
+          <button type="submit" class="submit-form-btn" id="submit-form-btn">
+            Submit
+          </button>
+        </form>
+      </div>
     </div>
-    <div class="library-container">
-
-    </div>
-
-</body>
-
+    <div class="library-container"></div>
+  </body>
 </html>
