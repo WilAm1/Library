@@ -101,6 +101,9 @@ h1 {
   font-style: italic;
 }
 
+#submit-form-btn:disabled {
+  opacity: 0.5;
+}
 #submit-form-btn {
   padding: 8px 32px;
   background-color: #00adb5;

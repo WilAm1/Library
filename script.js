@@ -133,22 +133,29 @@ window.onclick = function (e) {
   }
 };
 
-// Form and Submit Input
-const checkValidInput = function (name, author, pages) {
-  return name !== "" && author !== "" && pages !== "" && Number(pages) > 0;
-};
 const nameElem = document.getElementById("name");
 const author = document.getElementById("author");
 const pages = document.getElementById("pages");
 const readIt = document.getElementById("reading").checked ? true : false;
 const errorElement = document.querySelector(".error");
 const form = document.querySelector("#form");
+const submit = document.querySelector("#submit-form-btn");
 const requiredElements = [...form.querySelectorAll("input[required]")];
 const createErrorSibling = (parent) => {
   const elem = parent.appendChild(document.createElement("span"));
   elem.classList.add("error");
   return elem;
 };
+
+const checkBtnsValidity = () => {
+  return requiredElements.every((elem) => {
+    return elem.checkValidity();
+  });
+};
+const toggleSubmitBtn = () => {
+  submit.disabled = !checkBtnsValidity();
+};
+// Adds event listeners to each inputs
 requiredElements.forEach((elem) => {
   elem.addEventListener("input", ({ target }) => {
     const errorSibling =
@@ -160,11 +167,12 @@ requiredElements.forEach((elem) => {
       errorSibling.classList.add("active");
       showError(target, errorSibling);
     }
+    toggleSubmitBtn();
   });
 });
 
 function showError(element, errorElem) {
-  let error = element.validity.valueMissing
+  errorElem.textContent = element.validity.valueMissing
     ? `${element.name} must have value!`
     : element.validity.tooShort
     ? `Too short. Must be atleast ${element.minLength}`
@@ -173,20 +181,12 @@ function showError(element, errorElem) {
     : element.validity.typeMismatch
     ? "Unexpected Value!"
     : "Unknown Value";
-
-  errorElem.textContent = error;
 }
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
-  const isValidated = requiredElements.every((elem) => {
-    return elem.checkValidity();
-  });
-  if (isValidated) {
-    console.log("Form is valid.");
-  } else {
-    console.log("not valid lmao");
-  }
+  e.target.reset();
+  toggleSubmitBtn();
 });
 
 const getFormInput = function () {
@@ -196,15 +196,15 @@ const getFormInput = function () {
   return book;
 };
 
-const submitFormBtnDOM = document.querySelector("#submit-form-btn");
-submitFormBtnDOM.addEventListener("click", () => {
-  const newBook = getFormInput();
-  if (!newBook) return;
-  addBookToLibrary(newBook);
-  refreshLibrary();
-  saveToLocalStorage();
-  modal.style.display = "none";
-});
+// const submitFormBtnDOM = document.querySelector("#submit-form-btn");
+// submitFormBtnDOM.addEventListener("click", () => {
+//   const newBook = getFormInput();
+//   if (!newBook) return;
+//   addBookToLibrary(newBook);
+//   refreshLibrary();
+//   saveToLocalStorage();
+//   modal.style.display = "none";
+// });
 
 // const Book1 = new Book('Sample Book Title', 'WilAmI', '123', true);
 let myLibrary = getLocalStorage();
