@@ -22,14 +22,14 @@ const addBookToLibrary = function (book) {
   saveToLocalStorage();
 };
 
-const JSONToBook = function (book) {
+const convertJSONtoBook = function (book) {
   return new Book(book.title, book.author, book.pages, book.finished);
 };
 
 function getLocalStorage() {
   const library = JSON.parse(localStorage.getItem("library"));
   if (!library) return [];
-  return library.map((book) => JSONToBook(book));
+  return library.map((book) => convertJSONtoBook(book));
 }
 
 // Book div and its content
@@ -137,9 +137,11 @@ const nameElem = document.getElementById("name");
 const author = document.getElementById("author");
 const pages = document.getElementById("pages");
 const errorElement = document.querySelector(".error");
+
 const form = document.querySelector("#form");
 const submit = document.querySelector("#submit-form-btn");
 const requiredElements = [...form.querySelectorAll("input[required]")];
+
 const createErrorSibling = (parent) => {
   const elem = parent.appendChild(document.createElement("span"));
   elem.classList.add("error");
@@ -188,31 +190,28 @@ function showError(element, errorElem) {
 }
 
 const getFormInput = function () {
-  const values = requiredElements.reduce((acc, currentVal) => {
+  return requiredElements.reduce((acc, currentVal) => {
     const tag = currentVal.id;
     acc[tag] = currentVal.value;
     return acc;
   }, {});
-  const { name, author, pages } = values;
-  const readIt = document.getElementById("reading").checked ? true : false;
-  const book = new Book(name, author, pages, readIt);
-  console.log(book, book.constructor);
-  return book;
 };
 
 // * Form event Listener
 form.addEventListener("submit", (e) => {
   e.preventDefault();
   toggleSubmitBtn();
-  const newBook = getFormInput();
+  const requiredValues = getFormInput();
+  const { name, author, pages } = requiredValues;
+  const readIt = document.getElementById("reading").checked ? true : false;
+  const book = new Book(name, author, pages, readIt);
   e.target.reset();
-  addBookToLibrary(newBook);
+  addBookToLibrary(book);
   refreshLibrary();
   saveToLocalStorage();
   modal.style.display = "none";
 });
 
-// const Book1 = new Book('Sample Book Title', 'WilAmI', '123', true);
 let myLibrary = getLocalStorage();
 
 document.addEventListener("DOMContentLoaded", refreshLibrary);
